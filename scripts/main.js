@@ -11,20 +11,25 @@ function main() {
 	{
 		navigator.permissions.query({ name: "midi", sysex: true }).then((result) => {
 			if (result.state === "granted") {
-				// Access granted.
-				// alert("gRanted");
 				console.log("gRanted");
 			} else if (result.state === "prompt") {
-				// Using API will prompt for permission
-				// alert("pRompt");
 				console.log("pRompt");
 			}
-
-			// alert("dEnied");
+			
 			console.log("dEnied");
-			// Permission was denied by user prompt or permission policy
 		});
+
+		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 	}
+}
+
+let globalMidi = null; // global MIDIAccess object
+function onMIDISuccess(midiAccess) {
+  console.log("MIDI ready!");
+  globalMidi = midiAccess; // store in the global (in real usage, would probably keep in an object instance)
+}
+function onMIDIFailure(msg) {
+  console.error(`Failed to get MIDI access - ${msg}`);
 }
 
 main();
