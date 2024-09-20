@@ -15,31 +15,12 @@ function main() {
 	}
 	else
 	{
-		// navigator.permissions.query({ name: "midi", sysex: true }).then((result) => {
-		// 	if (result.state === "granted") {
-		// 		console.log("gRanted");
-		// 	} else if (result.state === "prompt") {
-		// 		console.log("pRompt");
-		// 	}
-			
-		// 	console.log("dEnied");
-		// });
-
-		// navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 	}
 }
 
-const keyColorBlack = window.getComputedStyle(document.getElementById("key-Db0")).getPropertyValue("background-color");
-const keyColorWhite = window.getComputedStyle(document.getElementById("key-C0")).getPropertyValue("background-color");
-const keyColorHighlight = window.getComputedStyle(document.getElementById("key-highlight-color")).getPropertyValue("background-color");
-
-const keyC0 = document.getElementById("key-C0");
-const keyDb0 = document.getElementById("key-Db0");
-const keyD0 = document.getElementById("key-D0");
-
 function whenMidiAvailable(midiAccess) {
 	if (midiAccess) {
-		console.log("ahh");
 		midiAccess.inputs.forEach((entry) => {
 			entry.onmidimessage = onMidiMsg;
 		});
@@ -51,13 +32,54 @@ function whenMidiAvailable(midiAccess) {
 function onMidiMsg(event) {
 	let message = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `;
 	for (const character of event.data) {
-		message += `0x${character.toString(16)} `;
+		message += `${character.toString()} `;
 	}
 	console.log(message);
+
+	let downOrUp = null;
+	if (event.data[0] == 144) { downOrUp = "down"; }
+	if (event.data[0] == 128) { downOrUp = "up"; }
+	let keyCode = event.data[1];
+	let velocity = event.data[2];
+
+	onMidiKeyPress(downOrUp, keyCode, velocity);
+}
+
+const keyColorBlack = window.getComputedStyle(document.getElementsByClassName("key-top")[0]).getPropertyValue("background-color");
+const keyColorWhite = window.getComputedStyle(document.getElementsByClassName("key-bottom")[0]).getPropertyValue("background-color");
+const keyColorHighlight = window.getComputedStyle(document.getElementsByClassName("key-highlight-color")[0]).getPropertyValue("background-color");
+const keyColorCorrect = window.getComputedStyle(document.getElementsByClassName("key-correct-color")[0]).getPropertyValue("background-color");
+const keyColorIncorrect = window.getComputedStyle(document.getElementsByClassName("key-incorrect-color")[0]).getPropertyValue("background-color");
+
+const keyC0 = document.getElementById("key-C0");
+const keyDb0 = document.getElementById("key-Db0");
+const keyD0 = document.getElementById("key-D0");
+
+function codeToKey(keyCode) {
+	const startingC = 24;
+	switch (keyCode) {
+		case startingC + 0:
+			return keyC0;
+		case startingC + 1:
+			return keyDb0;
+		default:
+			return null;
+	}
+}
+
+const keydownArray = [];
+for (let i = 0; i <= 127; i++) {
+	keydownArray[i] = false;
+}
+
+function onMidiKeyPress(downOrUp, keyCode, velocity) {
+	if (downOrUp === "down") {
+		keydownArray[keyCode] = true;
+	} else if (downOrUp === "up") {
+		keydownArray[keyCode] = false;
+	}
 }
 
 main();
 
-// console.log(keyColorBlack);
-// keyDb0.style.backgroundColor = keyColorHighlight;
-// keyD0.style.backgroundColor = keyColorHighlight;
+// keyD0.style.backgroundColor = keyColorIncorrect;
