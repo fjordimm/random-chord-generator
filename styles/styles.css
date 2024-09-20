@@ -1,6 +1,78 @@
 
+:root
+{
+	--key-half-height-top: 80px;
+	--key-half-height-bottom: 60px;
+	--key-width-top-large: 30px;
+	--key-width-top-small: 20px;
+	--key-width-bottom: 40px;
+}
+
 html, body
 {
 	margin: 0;
 	padding: 0;
 }
+
+.main-div
+{
+	display: flex;
+	flex-direction: column;
+	width: min-content;
+	gap: 10px;
+	padding: 10px;
+}
+
+.key-bottom, .key-top-white-large, .key-top-white-small
+{
+	background-color: #E5E5E5;
+	box-shadow: inset 0 0 5px 0px #A0A0A0;
+}
+
+.key-top-black
+{
+	background-color: #303030;
+	box-shadow: inset 0 0 5px 0px black;
+}
+
+.piano-top, .piano-bottom
+{
+	display: flex;
+	flex-direction: row;
+	width: min-content;
+}
+
+.piano-top
+{
+	padding-left: var(--key-width-left-padding);
+}
+
+.key-top-white-small, .key-top-black
+{
+	width: var(--key-width-top-small);
+	height: var(--key-half-height-top);
+}
+
+.key-top-white-large
+{
+	width: var(--key-width-top-large);
+	height: var(--key-half-height-top);
+}
+
+.key-bottom
+{
+	width: var(--key-width-bottom);
+	height: var(--key-half-height-bottom);
+}
+
+/* .test1
+{
+	display: flex;
+	flex-direction: row;
+	width: min-content;
+}
+
+.test2
+{
+
+} */

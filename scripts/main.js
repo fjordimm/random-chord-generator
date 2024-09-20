@@ -1,4 +1,12 @@
 
+function onMIDISuccess(midiAccess) {
+	whenMidiAvailable(midiAccess);
+}
+function onMIDIFailure(msg) {
+	alert("Midi access was denied (see console for more details).");
+	console.error(`Failed to get MIDI access - ${msg}`);
+}
+
 function main() {
 	const thing = document.getElementById("thing");
 	thing.innerHTML = "Wowza";
@@ -9,27 +17,39 @@ function main() {
 	}
 	else
 	{
-		navigator.permissions.query({ name: "midi", sysex: true }).then((result) => {
-			if (result.state === "granted") {
-				console.log("gRanted");
-			} else if (result.state === "prompt") {
-				console.log("pRompt");
-			}
+		// navigator.permissions.query({ name: "midi", sysex: true }).then((result) => {
+		// 	if (result.state === "granted") {
+		// 		console.log("gRanted");
+		// 	} else if (result.state === "prompt") {
+		// 		console.log("pRompt");
+		// 	}
 			
-			console.log("dEnied");
-		});
+		// 	console.log("dEnied");
+		// });
 
 		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+
+		
 	}
 }
 
-let globalMidi = null; // global MIDIAccess object
-function onMIDISuccess(midiAccess) {
-  console.log("MIDI ready!");
-  globalMidi = midiAccess; // store in the global (in real usage, would probably keep in an object instance)
-}
-function onMIDIFailure(msg) {
-  console.error(`Failed to get MIDI access - ${msg}`);
+function whenMidiAvailable(midiAccess) {
+	if (midiAccess) {
+		console.log("ahh");
+		midiAccess.inputs.forEach((entry) => {
+			entry.onmidimessage = onMidiMsg;
+		});
+	} else {
+		alert("MIDIAccess object was not initialized.");
+	}
 }
 
-main();
+function onMidiMsg(event) {
+	let message = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `;
+	for (const character of event.data) {
+		message += `0x${character.toString(16)} `;
+	}
+	console.log(message);
+}
+
+// main();
