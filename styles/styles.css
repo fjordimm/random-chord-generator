@@ -1,10 +1,10 @@
 
 :root
 {
-	--key-half-height-top: 80px;
-	--key-half-height-bottom: 60px;
-	--key-width-top-large: 30px;
+	--key-height-top: 80px;
+	--key-height-bottom: 140px;
 	--key-width-top-small: 20px;
+	--key-width-top-large: 30px;
 	--key-width-bottom: 40px;
 }
 
@@ -12,6 +12,28 @@ html, body
 {
 	margin: 0;
 	padding: 0;
+}
+
+.key-top-space-large, .key-top-space-small
+{
+	background-color: transparent;
+}
+
+.key-top
+{
+	background-color: #303030;
+	box-shadow: inset 0 0 5px 0px #00000060;
+}
+
+.key-bottom
+{
+	background-color: #E5E5E5;
+	box-shadow: inset 0 0 5px 0px #00000060;
+}
+
+#key-highlight-color
+{
+	background-color: mediumslateblue;
 }
 
 .main-div
@@ -23,6 +45,57 @@ html, body
 	padding: 10px;
 }
 
+.piano
+{
+	display: flex;
+	flex-direction: column;
+	width: min-content;
+}
+
+.piano-top
+{
+	display: flex;
+	flex-direction: row;
+	width: min-content;
+}
+
+.piano-top > *
+{
+	z-index: 1;
+}
+
+.piano-bottom
+{
+	display: flex;
+	flex-direction: row;
+	width: min-content;
+}
+
+.piano-bottom > *
+{
+	margin-top: calc(0px - var(--key-height-top));
+	z-index: 0;
+}
+
+.key-top-space-large
+{
+	width: var(--key-width-top-large);
+	height: var(--key-height-top);
+}
+
+.key-top-space-small, .key-top
+{
+	width: var(--key-width-top-small);
+	height: var(--key-height-top);
+}
+
+.key-bottom
+{
+	width: var(--key-width-bottom);
+	height: var(--key-height-bottom);
+}
+
+/* 
 .key-bottom, .key-top-white-large, .key-top-white-small
 {
 	background-color: #E5E5E5;
@@ -65,14 +138,43 @@ html, body
 	height: var(--key-half-height-bottom);
 }
 
-/* .test1
+.test1
+{
+	display: flex;
+	flex-direction: column;
+	width: min-content;
+}
+
+.test2
 {
 	display: flex;
 	flex-direction: row;
 	width: min-content;
 }
 
-.test2
+.test3
 {
+	background-color: green;
+	width: 40px;
+	height: 100px;
 
+	margin-top: -30px;
+	z-index: 0;
+}
+
+.test4
+{
+	background-color: red;
+	width: 30px;
+	height: 80px;
+
+	z-index: 1;
+}
+
+.test5
+{
+	background-color: magenta;
+	width: 20px;
+
+	z-index: 1;
 } */

@@ -2,15 +2,13 @@
 function onMIDISuccess(midiAccess) {
 	whenMidiAvailable(midiAccess);
 }
+
 function onMIDIFailure(msg) {
 	alert("Midi access was denied (see console for more details).");
 	console.error(`Failed to get MIDI access - ${msg}`);
 }
 
 function main() {
-	const thing = document.getElementById("thing");
-	thing.innerHTML = "Wowza";
-
 	if (!window.isSecureContext)
 	{
 		alert("Window is not in a 'secure context'.");
@@ -27,11 +25,17 @@ function main() {
 		// 	console.log("dEnied");
 		// });
 
-		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
-
-		
+		// navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 	}
 }
+
+const keyColorBlack = window.getComputedStyle(document.getElementById("key-Db0")).getPropertyValue("background-color");
+const keyColorWhite = window.getComputedStyle(document.getElementById("key-C0")).getPropertyValue("background-color");
+const keyColorHighlight = window.getComputedStyle(document.getElementById("key-highlight-color")).getPropertyValue("background-color");
+
+const keyC0 = document.getElementById("key-C0");
+const keyDb0 = document.getElementById("key-Db0");
+const keyD0 = document.getElementById("key-D0");
 
 function whenMidiAvailable(midiAccess) {
 	if (midiAccess) {
@@ -52,4 +56,8 @@ function onMidiMsg(event) {
 	console.log(message);
 }
 
-// main();
+main();
+
+// console.log(keyColorBlack);
+// keyDb0.style.backgroundColor = keyColorHighlight;
+// keyD0.style.backgroundColor = keyColorHighlight;
