@@ -55,6 +55,12 @@ html, body
 	padding: 10px;
 }
 
+.generate-button-and-settings
+{
+	display: flex;
+	flex-direction: row;
+}
+
 .piano
 {
 	display: flex;

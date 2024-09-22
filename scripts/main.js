@@ -16,6 +16,8 @@ function main() {
 	else
 	{
 		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+
+		generateRandomChord();
 	}
 }
 
@@ -56,21 +58,19 @@ const pianoBottomElem = document.getElementById("piano-bottom-elem");
 
 const numOctaves = 4;
 const keyElemArray = [];
-{
-	for (let octave = 0; octave < numOctaves; octave++) {
-		keyElemArray[12 * octave +  0] = pianoBottomElem.children[7 * octave + 0];
-		keyElemArray[12 * octave +  1] = pianoTopElem.children[12 * octave + 1];
-		keyElemArray[12 * octave +  2] = pianoBottomElem.children[7 * octave + 1];
-		keyElemArray[12 * octave +  3] = pianoTopElem.children[12 * octave + 3];
-		keyElemArray[12 * octave +  4] = pianoBottomElem.children[7 * octave + 2];
-		keyElemArray[12 * octave +  5] = pianoBottomElem.children[7 * octave + 3];
-		keyElemArray[12 * octave +  6] = pianoTopElem.children[12 * octave + 6];
-		keyElemArray[12 * octave +  7] = pianoBottomElem.children[7 * octave + 4];
-		keyElemArray[12 * octave +  8] = pianoTopElem.children[12 * octave + 8];
-		keyElemArray[12 * octave +  9] = pianoBottomElem.children[7 * octave + 5];
-		keyElemArray[12 * octave + 10] = pianoTopElem.children[12 * octave + 10];
-		keyElemArray[12 * octave + 11] = pianoBottomElem.children[7 * octave + 6];
-	}
+for (let octave = 0; octave < numOctaves; octave++) {
+	keyElemArray[12 * octave +  0] = pianoBottomElem.children[7 * octave + 0];
+	keyElemArray[12 * octave +  1] = pianoTopElem.children[12 * octave + 1];
+	keyElemArray[12 * octave +  2] = pianoBottomElem.children[7 * octave + 1];
+	keyElemArray[12 * octave +  3] = pianoTopElem.children[12 * octave + 3];
+	keyElemArray[12 * octave +  4] = pianoBottomElem.children[7 * octave + 2];
+	keyElemArray[12 * octave +  5] = pianoBottomElem.children[7 * octave + 3];
+	keyElemArray[12 * octave +  6] = pianoTopElem.children[12 * octave + 6];
+	keyElemArray[12 * octave +  7] = pianoBottomElem.children[7 * octave + 4];
+	keyElemArray[12 * octave +  8] = pianoTopElem.children[12 * octave + 8];
+	keyElemArray[12 * octave +  9] = pianoBottomElem.children[7 * octave + 5];
+	keyElemArray[12 * octave + 10] = pianoTopElem.children[12 * octave + 10];
+	keyElemArray[12 * octave + 11] = pianoBottomElem.children[7 * octave + 6];
 }
 
 const keydownArray = [];
@@ -130,6 +130,27 @@ function isBlackNote(note) {
 }
 
 const chordTextarea = document.getElementById("chord-textarea");
+const checkboxDoMinor = document.querySelector("#checkbox-do-minor");
+const checkboxDoDiminished = document.querySelector("#checkbox-do-diminished");
+const checkboxDoSevens = document.querySelector("#checkbox-do-sevens");
+
+function generateRandomChord() {
+	const root = Math.floor(Math.random() * 12);
+	const noteName = noteValToName(root, (Math.floor(Math.random() * 2) === 0) ? false : true);
+
+	let flat3 = false;
+	if (checkboxDoMinor.checked) {
+		// if 
+	}
+
+	// if (chordSettingsIncludeMinor.checked) {
+	// 	alert("Checked");
+	// } else {
+	// 	alert("Not Checked");
+	// }
+
+	chordTextarea.innerHTML = noteName;
+}
 
 function noteValToName(val, sharpInsteadOfFlat = false) {
 	switch (val) {
@@ -160,13 +181,6 @@ function noteValToName(val, sharpInsteadOfFlat = false) {
 		default:
 			return "ErrorNote";
 	}
-}
-
-function generateRandomChord() {
-	const root = Math.floor(Math.random() * 12);
-	const noteName = noteValToName(root, (Math.floor(Math.random() * 2) === 0) ? false : true);
-
-	chordTextarea.innerHTML = noteName;
 }
 
 main();

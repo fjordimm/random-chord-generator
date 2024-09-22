@@ -11,7 +11,19 @@
 
 	<body>
 		<div class="main-div">
-			<button onclick="generateRandomChord()">Generate New</button>
+			<div class="generate-button-and-settings">
+				<button onclick="generateRandomChord()">Generate New</button>
+
+				<input type="checkbox" id="checkbox-do-minor" name="checkbox-do-minor" checked>
+				<label for="checkbox-do-minor">Minor</label>
+
+				<input type="checkbox" id="checkbox-do-diminished" name="checkbox-do-diminished" checked>
+				<label for="checkbox-do-diminished">Diminished</label>
+
+				<input type="checkbox" id="checkbox-do-sevens" name="checkbox-do-sevens" checked>
+				<label for="checkbox-do-sevens">Sevens</label>
+			</div>
+
 			<textarea readonly style="resize: none" id="chord-textarea">yooooo holy moly</textarea>
 
 			<div class="piano">
