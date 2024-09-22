@@ -36,7 +36,7 @@ function onMidiMsg(event) {
 	for (const character of event.data) {
 		message += `${character.toString()} `;
 	}
-	console.log(message);
+	// console.log(message);
 
 	let downOrUp = null;
 	if (event.data[0] == 144) { downOrUp = "down"; }
@@ -78,6 +78,8 @@ for (let i = 0; i <= 127; i++) {
 	keydownArray[i] = false;
 }
 
+let currentChordNotes = [];
+
 function onMidiKeyPress(downOrUp, keyCode, velocity) {
 	if (downOrUp === "down") {
 		keydownArray[keyCode] = true;
@@ -86,7 +88,8 @@ function onMidiKeyPress(downOrUp, keyCode, velocity) {
 		if (!keyElem) {
 			console.warn(`The key code ${keyCode} does not correspond to an existing html element.`);
 		} else {
-			keyElem.style.backgroundColor = keyColorCorrect;
+			const isCorrect = currentChordNotes.includes((keyCode - startingC) % 12);
+			keyElem.style.backgroundColor = isCorrect ? keyColorCorrect : keyColorIncorrect;
 		}
 	} else if (downOrUp === "up") {
 		keydownArray[keyCode] = false;
@@ -138,6 +141,11 @@ function generateRandomChord() {
 	const intervals = suffixAndIntervals[1];
 
 	chordTextarea.innerHTML = noteName + " " + suffix;
+	
+	currentChordNotes = [];
+	for (const interval of intervals) {
+		currentChordNotes.push((root + interval) % 12);
+	}
 }
 
 function noteValToName(val, sharpInsteadOfFlat = false) {
@@ -199,37 +207,37 @@ function getSuffixAndIntervals() {
 
 		randVal -= weightMinor;
 		if (randVal < 0) {
-			return ["m", [0, 4, 7]];
+			return ["m", [0, 3, 7]];
 		}
 
 		randVal -= weightDiminished;
 		if (randVal < 0) {
-			return ["dim", [0, 4, 7]];
+			return ["dim", [0, 3, 6]];
 		}
 
 		randVal -= weightMajor7;
 		if (randVal < 0) {
-			return ["M7", [0, 4, 7]];
+			return ["M7", [0, 4, 7, 11]];
 		}
 
 		randVal -= weightDominant7;
 		if (randVal < 0) {
-			return ["7", [0, 4, 7]];
+			return ["7", [0, 4, 7, 10]];
 		}
 
 		randVal -= weightMinor7;
 		if (randVal < 0) {
-			return ["m7", [0, 4, 7]];
+			return ["m7", [0, 3, 7, 10]];
 		}
 
 		randVal -= weightHalfDiminished7;
 		if (randVal < 0) {
-			return ["hdim7", [0, 4, 7]];
+			return ["hdim7", [0, 3, 6, 10]];
 		}
 
 		randVal -= weightDiminished7;
 		if (randVal < 0) {
-			return ["dim7", [0, 4, 7]];
+			return ["dim7", [0, 3, 6, 9]];
 		}
 	}
 
