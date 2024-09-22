@@ -129,28 +129,13 @@ function isBlackNote(note) {
 	    || realNote === 10;
 }
 
-const chordTextarea = document.getElementById("chord-textarea");
-const sliderMajor = document.querySelector("#slider-major");
-const sliderMinor = document.querySelector("#slider-minor");
-// const checkboxDoMinor = document.querySelector("#checkbox-do-minor");
-// const checkboxDoDiminished = document.querySelector("#checkbox-do-diminished");
-// const checkboxDoSevens = document.querySelector("#checkbox-do-sevens");
-
 function generateRandomChord() {
 	const root = Math.floor(Math.random() * 12);
 	const noteName = noteValToName(root, (Math.floor(Math.random() * 2) === 0) ? false : true);
 
-	let suffix = "";
-	const weightMajor = parseInt(sliderMajor.value);
-	const weightMinor = parseInt(sliderMinor.value);
-	let randVal = Math.random() * (weightMajor + weightMinor);
-	if (randVal < weightMajor) {
-		suffix = "M";
-	} else if (randVal < weightMajor + weightMinor) {
-		suffix = "m";
-	} else {
-		console.error("The random chord type selector is broken.");
-	}
+	const suffixAndIntervals = getSuffixAndIntervals();
+	const suffix = suffixAndIntervals[0];
+	const intervals = suffixAndIntervals[1];
 
 	chordTextarea.innerHTML = noteName + suffix;
 }
@@ -182,8 +167,73 @@ function noteValToName(val, sharpInsteadOfFlat = false) {
 		case 11:
 			return "B";
 		default:
-			return "ErrorNote";
+			return "(ErrorNote)";
 	}
+}
+
+const chordTextarea = document.getElementById("chord-textarea");
+const sliderMajor = document.querySelector("#slider-major");
+const sliderMinor = document.querySelector("#slider-minor");
+const sliderDiminished = document.querySelector("#slider-diminished");
+const sliderMajor7 = document.querySelector("#slider-major7");
+const sliderDominant7 = document.querySelector("#slider-dominant7");
+const sliderMinor7 = document.querySelector("#slider-minor7");
+const sliderHalfDiminished7 = document.querySelector("#slider-half-diminished7");
+const sliderDiminished7 = document.querySelector("#slider-diminished7");
+
+function getSuffixAndIntervals() {
+	const weightMajor = parseInt(sliderMajor.value);
+	const weightMinor = parseInt(sliderMinor.value);
+	const weightDiminished = parseInt(sliderDiminished.value);
+	const weightMajor7 = parseInt(sliderMajor7.value);
+	const weightDominant7 = parseInt(sliderDominant7.value);
+	const weightMinor7 = parseInt(sliderMinor7.value);
+	const weightHalfDiminished7 = parseInt(sliderHalfDiminished7.value);
+	const weightDiminished7 = parseInt(sliderDiminished7.value);
+	let randVal = Math.random() * (weightMajor + weightMinor + weightDiminished + weightMajor7 + weightDominant7 + weightMinor7 + weightHalfDiminished7 + weightDiminished7);
+	{
+		randVal -= weightMajor;
+		if (randVal < 0) {
+			return ["M", [0, 4, 7]];
+		}
+
+		randVal -= weightMinor;
+		if (randVal < 0) {
+			return ["m", [0, 4, 7]];
+		}
+
+		randVal -= weightDiminished;
+		if (randVal < 0) {
+			return ["dim", [0, 4, 7]];
+		}
+
+		randVal -= weightMajor7;
+		if (randVal < 0) {
+			return ["M7", [0, 4, 7]];
+		}
+
+		randVal -= weightDominant7;
+		if (randVal < 0) {
+			return ["7", [0, 4, 7]];
+		}
+
+		randVal -= weightMinor7;
+		if (randVal < 0) {
+			return ["m7", [0, 4, 7]];
+		}
+
+		randVal -= weightHalfDiminished7;
+		if (randVal < 0) {
+			return ["hdim7", [0, 4, 7]];
+		}
+
+		randVal -= weightDiminished7;
+		if (randVal < 0) {
+			return ["dim7", [0, 4, 7]];
+		}
+	}
+
+	return "(ErrorSuffix)";
 }
 
 main();
