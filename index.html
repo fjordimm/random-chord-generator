@@ -14,14 +14,15 @@
 			<div class="generate-button-and-settings">
 				<button onclick="generateRandomChord()">Generate New</button>
 
-				<input type="checkbox" id="checkbox-do-minor" name="checkbox-do-minor" checked>
-				<label for="checkbox-do-minor">Minor</label>
+				<label>
+					<input type="range" class="slider-input" min="0" max="3" value="1" id="slider-major" name="slider-major">
+					Major
+				</label>
 
-				<input type="checkbox" id="checkbox-do-diminished" name="checkbox-do-diminished" checked>
-				<label for="checkbox-do-diminished">Diminished</label>
-
-				<input type="checkbox" id="checkbox-do-sevens" name="checkbox-do-sevens" checked>
-				<label for="checkbox-do-sevens">Sevens</label>
+				<label>
+					<input type="range" class="slider-input" min="0" max="3" value="1" id="slider-minor" name="slider-minor">
+					Minor
+				</label>
 			</div>
 
 			<textarea readonly style="resize: none" id="chord-textarea">yooooo holy moly</textarea>

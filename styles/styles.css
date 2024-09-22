@@ -58,7 +58,12 @@ html, body
 .generate-button-and-settings
 {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+}
+
+.slider-input
+{
+	width: 120px;
 }
 
 .piano

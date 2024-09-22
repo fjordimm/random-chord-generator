@@ -17,7 +17,7 @@ function main() {
 	{
 		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
-		generateRandomChord();
+		// generateRandomChord();
 	}
 }
 
@@ -130,26 +130,29 @@ function isBlackNote(note) {
 }
 
 const chordTextarea = document.getElementById("chord-textarea");
-const checkboxDoMinor = document.querySelector("#checkbox-do-minor");
-const checkboxDoDiminished = document.querySelector("#checkbox-do-diminished");
-const checkboxDoSevens = document.querySelector("#checkbox-do-sevens");
+const sliderMajor = document.querySelector("#slider-major");
+const sliderMinor = document.querySelector("#slider-minor");
+// const checkboxDoMinor = document.querySelector("#checkbox-do-minor");
+// const checkboxDoDiminished = document.querySelector("#checkbox-do-diminished");
+// const checkboxDoSevens = document.querySelector("#checkbox-do-sevens");
 
 function generateRandomChord() {
 	const root = Math.floor(Math.random() * 12);
 	const noteName = noteValToName(root, (Math.floor(Math.random() * 2) === 0) ? false : true);
 
-	let flat3 = false;
-	if (checkboxDoMinor.checked) {
-		// if 
+	let suffix = "";
+	const weightMajor = parseInt(sliderMajor.value);
+	const weightMinor = parseInt(sliderMinor.value);
+	let randVal = Math.random() * (weightMajor + weightMinor);
+	if (randVal < weightMajor) {
+		suffix = "M";
+	} else if (randVal < weightMajor + weightMinor) {
+		suffix = "m";
+	} else {
+		console.error("The random chord type selector is broken.");
 	}
 
-	// if (chordSettingsIncludeMinor.checked) {
-	// 	alert("Checked");
-	// } else {
-	// 	alert("Not Checked");
-	// }
-
-	chordTextarea.innerHTML = noteName;
+	chordTextarea.innerHTML = noteName + suffix;
 }
 
 function noteValToName(val, sharpInsteadOfFlat = false) {
