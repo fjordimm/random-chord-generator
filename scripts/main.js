@@ -63,6 +63,18 @@ const keyAb0 = document.getElementById("key-Ab0");
 const keyA0 = document.getElementById("key-A0");
 const keyBb0 = document.getElementById("key-Bb0");
 const keyB0 = document.getElementById("key-B0");
+const keyC1 = document.getElementById("key-C1");
+const keyDb1 = document.getElementById("key-Db1");
+const keyD1 = document.getElementById("key-D1");
+const keyEb1 = document.getElementById("key-Eb1");
+const keyE1 = document.getElementById("key-E1");
+const keyF1 = document.getElementById("key-F1");
+const keyGb1 = document.getElementById("key-Gb1");
+const keyG1 = document.getElementById("key-G1");
+const keyAb1 = document.getElementById("key-Ab1");
+const keyA1 = document.getElementById("key-A1");
+const keyBb1 = document.getElementById("key-Bb1");
+const keyB1 = document.getElementById("key-B1");
 
 const keydownArray = [];
 for (let i = 0; i <= 127; i++) {
@@ -119,6 +131,30 @@ function codeToKeyElem(keyCode) {
 			return keyBb0;
 		case startingC + 11:
 			return keyB0;
+		case startingC + 12:
+			return keyC1;
+		case startingC + 13:
+			return keyDb1;
+		case startingC + 14:
+			return keyD1;
+		case startingC + 15:
+			return keyEb1;
+		case startingC + 16:
+			return keyE1;
+		case startingC + 17:
+			return keyF1;
+		case startingC + 18:
+			return keyGb1;
+		case startingC + 19:
+			return keyG1;
+		case startingC + 20:
+			return keyAb1;
+		case startingC + 21:
+			return keyA1;
+		case startingC + 22:
+			return keyBb1;
+		case startingC + 23:
+			return keyB1;
 		default:
 			return null;
 	}
