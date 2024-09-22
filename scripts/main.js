@@ -131,8 +131,42 @@ function isBlackNote(note) {
 
 const chordTextarea = document.getElementById("chord-textarea");
 
+function noteValToName(val, sharpInsteadOfFlat = false) {
+	switch (val) {
+		case 0:
+			return "C";
+		case 1:
+			return sharpInsteadOfFlat ? "C#" : "Db";
+		case 2:
+			return "D";
+		case 3:
+			return sharpInsteadOfFlat ? "D#" : "Eb";
+		case 4:
+			return "E";
+		case 5:
+			return "F";
+		case 6:
+			return sharpInsteadOfFlat ? "F#" : "Gb";
+		case 7:
+			return "G";
+		case 8:
+			return sharpInsteadOfFlat ? "G#" : "Ab";
+		case 9:
+			return "A";
+		case 10:
+			return sharpInsteadOfFlat ? "A#" : "Bb";
+		case 11:
+			return "B";
+		default:
+			return "ErrorNote";
+	}
+}
+
 function generateRandomChord() {
-	chordTextarea.innerHTML = "woize";
+	const root = Math.floor(Math.random() * 12);
+	const noteName = noteValToName(root, (Math.floor(Math.random() * 2) === 0) ? false : true);
+
+	chordTextarea.innerHTML = noteName;
 }
 
 main();
