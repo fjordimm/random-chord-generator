@@ -129,4 +129,10 @@ function isBlackNote(note) {
 	    || realNote === 10;
 }
 
+const chordTextarea = document.getElementById("chord-textarea");
+
+function generateRandomChord() {
+	chordTextarea.innerHTML = "woize";
+}
+
 main();
