@@ -54,6 +54,15 @@ const keyColorIncorrect = window.getComputedStyle(document.getElementsByClassNam
 const keyC0 = document.getElementById("key-C0");
 const keyDb0 = document.getElementById("key-Db0");
 const keyD0 = document.getElementById("key-D0");
+const keyEb0 = document.getElementById("key-Eb0");
+const keyE0 = document.getElementById("key-E0");
+const keyF0 = document.getElementById("key-F0");
+const keyGb0 = document.getElementById("key-Gb0");
+const keyG0 = document.getElementById("key-G0");
+const keyAb0 = document.getElementById("key-Ab0");
+const keyA0 = document.getElementById("key-A0");
+const keyBb0 = document.getElementById("key-Bb0");
+const keyB0 = document.getElementById("key-B0");
 
 const keydownArray = [];
 for (let i = 0; i <= 127; i++) {
@@ -92,6 +101,24 @@ function codeToKeyElem(keyCode) {
 			return keyDb0;
 		case startingC + 2:
 			return keyD0;
+		case startingC + 3:
+			return keyEb0;
+		case startingC + 4:
+			return keyE0;
+		case startingC + 5:
+			return keyF0;
+		case startingC + 6:
+			return keyGb0;
+		case startingC + 7:
+			return keyG0;
+		case startingC + 8:
+			return keyAb0;
+		case startingC + 9:
+			return keyA0;
+		case startingC + 10:
+			return keyBb0;
+		case startingC + 11:
+			return keyB0;
 		default:
 			return null;
 	}
