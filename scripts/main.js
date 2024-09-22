@@ -54,9 +54,10 @@ const keyColorIncorrect = window.getComputedStyle(document.getElementsByClassNam
 const pianoTopElem = document.getElementById("piano-top-elem");
 const pianoBottomElem = document.getElementById("piano-bottom-elem");
 
+const numOctaves = 4;
 const keyElemArray = [];
 {
-	for (let octave = 0; octave < 2; octave++) {
+	for (let octave = 0; octave < numOctaves; octave++) {
 		keyElemArray[12 * octave +  0] = pianoBottomElem.children[7 * octave + 0];
 		keyElemArray[12 * octave +  1] = pianoTopElem.children[12 * octave + 1];
 		keyElemArray[12 * octave +  2] = pianoBottomElem.children[7 * octave + 1];
