@@ -55,18 +55,6 @@ const keyC0 = document.getElementById("key-C0");
 const keyDb0 = document.getElementById("key-Db0");
 const keyD0 = document.getElementById("key-D0");
 
-function codeToKey(keyCode) {
-	const startingC = 24;
-	switch (keyCode) {
-		case startingC + 0:
-			return keyC0;
-		case startingC + 1:
-			return keyDb0;
-		default:
-			return null;
-	}
-}
-
 const keydownArray = [];
 for (let i = 0; i <= 127; i++) {
 	keydownArray[i] = false;
@@ -75,11 +63,56 @@ for (let i = 0; i <= 127; i++) {
 function onMidiKeyPress(downOrUp, keyCode, velocity) {
 	if (downOrUp === "down") {
 		keydownArray[keyCode] = true;
+
+		let keyElem = codeToKeyElem(keyCode);
+		if (!keyElem) {
+			console.warn(`The key code ${keyCode} does not correspond to an existing html element.`);
+		} else {
+			keyElem.style.backgroundColor = keyColorCorrect;
+		}
 	} else if (downOrUp === "up") {
 		keydownArray[keyCode] = false;
+
+		let keyElem = codeToKeyElem(keyCode);
+		if (!keyElem) {
+			console.warn(`The key code ${keyCode} does not correspond to an existing html element.`);
+		} else {
+			keyElem.style.backgroundColor = isBlackNote(keyCodeToNote(keyCode)) ? keyColorBlack : keyColorWhite;
+		}
 	}
 }
 
-main();
+const startingC = 24;
 
-// keyD0.style.backgroundColor = keyColorIncorrect;
+function codeToKeyElem(keyCode) {
+	switch (keyCode) {
+		case startingC + 0:
+			return keyC0;
+		case startingC + 1:
+			return keyDb0;
+		case startingC + 2:
+			return keyD0;
+		default:
+			return null;
+	}
+}
+
+function keyCodeToNote(keyCode) {
+	return modNote(keyCode - startingC);
+}
+
+function modNote(note) {
+	return note % 12;
+}
+
+function isBlackNote(note) {
+	const realNote = modNote(note);
+
+	return realNote === 1
+	    || realNote === 3
+	    || realNote === 6
+	    || realNote === 8
+	    || realNote === 10;
+}
+
+main();
