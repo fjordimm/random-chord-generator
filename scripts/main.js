@@ -51,30 +51,26 @@ const keyColorHighlight = window.getComputedStyle(document.getElementsByClassNam
 const keyColorCorrect = window.getComputedStyle(document.getElementsByClassName("key-correct-color")[0]).getPropertyValue("background-color");
 const keyColorIncorrect = window.getComputedStyle(document.getElementsByClassName("key-incorrect-color")[0]).getPropertyValue("background-color");
 
-const keyC0 = document.getElementById("key-C0");
-const keyDb0 = document.getElementById("key-Db0");
-const keyD0 = document.getElementById("key-D0");
-const keyEb0 = document.getElementById("key-Eb0");
-const keyE0 = document.getElementById("key-E0");
-const keyF0 = document.getElementById("key-F0");
-const keyGb0 = document.getElementById("key-Gb0");
-const keyG0 = document.getElementById("key-G0");
-const keyAb0 = document.getElementById("key-Ab0");
-const keyA0 = document.getElementById("key-A0");
-const keyBb0 = document.getElementById("key-Bb0");
-const keyB0 = document.getElementById("key-B0");
-const keyC1 = document.getElementById("key-C1");
-const keyDb1 = document.getElementById("key-Db1");
-const keyD1 = document.getElementById("key-D1");
-const keyEb1 = document.getElementById("key-Eb1");
-const keyE1 = document.getElementById("key-E1");
-const keyF1 = document.getElementById("key-F1");
-const keyGb1 = document.getElementById("key-Gb1");
-const keyG1 = document.getElementById("key-G1");
-const keyAb1 = document.getElementById("key-Ab1");
-const keyA1 = document.getElementById("key-A1");
-const keyBb1 = document.getElementById("key-Bb1");
-const keyB1 = document.getElementById("key-B1");
+const pianoTopElem = document.getElementById("piano-top-elem");
+const pianoBottomElem = document.getElementById("piano-bottom-elem");
+
+const keyElemArray = [];
+{
+	for (let octave = 0; octave < 2; octave++) {
+		keyElemArray[12 * octave +  0] = pianoBottomElem.children[7 * octave + 0];
+		keyElemArray[12 * octave +  1] = pianoTopElem.children[12 * octave + 1];
+		keyElemArray[12 * octave +  2] = pianoBottomElem.children[7 * octave + 1];
+		keyElemArray[12 * octave +  3] = pianoTopElem.children[12 * octave + 3];
+		keyElemArray[12 * octave +  4] = pianoBottomElem.children[7 * octave + 2];
+		keyElemArray[12 * octave +  5] = pianoBottomElem.children[7 * octave + 3];
+		keyElemArray[12 * octave +  6] = pianoTopElem.children[12 * octave + 6];
+		keyElemArray[12 * octave +  7] = pianoBottomElem.children[7 * octave + 4];
+		keyElemArray[12 * octave +  8] = pianoTopElem.children[12 * octave + 8];
+		keyElemArray[12 * octave +  9] = pianoBottomElem.children[7 * octave + 5];
+		keyElemArray[12 * octave + 10] = pianoTopElem.children[12 * octave + 10];
+		keyElemArray[12 * octave + 11] = pianoBottomElem.children[7 * octave + 6];
+	}
+}
 
 const keydownArray = [];
 for (let i = 0; i <= 127; i++) {
@@ -106,57 +102,11 @@ function onMidiKeyPress(downOrUp, keyCode, velocity) {
 const startingC = 24;
 
 function codeToKeyElem(keyCode) {
-	switch (keyCode) {
-		case startingC + 0:
-			return keyC0;
-		case startingC + 1:
-			return keyDb0;
-		case startingC + 2:
-			return keyD0;
-		case startingC + 3:
-			return keyEb0;
-		case startingC + 4:
-			return keyE0;
-		case startingC + 5:
-			return keyF0;
-		case startingC + 6:
-			return keyGb0;
-		case startingC + 7:
-			return keyG0;
-		case startingC + 8:
-			return keyAb0;
-		case startingC + 9:
-			return keyA0;
-		case startingC + 10:
-			return keyBb0;
-		case startingC + 11:
-			return keyB0;
-		case startingC + 12:
-			return keyC1;
-		case startingC + 13:
-			return keyDb1;
-		case startingC + 14:
-			return keyD1;
-		case startingC + 15:
-			return keyEb1;
-		case startingC + 16:
-			return keyE1;
-		case startingC + 17:
-			return keyF1;
-		case startingC + 18:
-			return keyGb1;
-		case startingC + 19:
-			return keyG1;
-		case startingC + 20:
-			return keyAb1;
-		case startingC + 21:
-			return keyA1;
-		case startingC + 22:
-			return keyBb1;
-		case startingC + 23:
-			return keyB1;
-		default:
-			return null;
+	const index = keyCode - startingC;
+	if (index < 0 || index >= keyElemArray.length) {
+		return null;
+	} else {
+		return keyElemArray[keyCode - startingC];
 	}
 }
 
