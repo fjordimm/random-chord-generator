@@ -17,7 +17,7 @@ function main() {
 	{
 		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
-		// generateRandomChord();
+		generateRandomChord();
 	}
 }
 
@@ -137,7 +137,7 @@ function generateRandomChord() {
 	const suffix = suffixAndIntervals[0];
 	const intervals = suffixAndIntervals[1];
 
-	chordTextarea.innerHTML = noteName + suffix;
+	chordTextarea.innerHTML = noteName + " " + suffix;
 }
 
 function noteValToName(val, sharpInsteadOfFlat = false) {
@@ -194,7 +194,7 @@ function getSuffixAndIntervals() {
 	{
 		randVal -= weightMajor;
 		if (randVal < 0) {
-			return ["M", [0, 4, 7]];
+			return ["", [0, 4, 7]];
 		}
 
 		randVal -= weightMinor;
