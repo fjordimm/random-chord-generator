@@ -36,15 +36,16 @@ function onMidiMsg(event) {
 	for (const character of event.data) {
 		message += `${character.toString()} `;
 	}
-	// console.log(message);
+	console.log(message);
 
-	let downOrUp = null;
-	if (event.data[0] == 144) { downOrUp = "down"; }
-	if (event.data[0] == 128) { downOrUp = "up"; }
+	let action = null;
+	if (event.data[0] == 144) { action = "down"; }
+	if (event.data[0] == 128) { action = "up"; }
+	if (event.data[0] == 176) { action = "pedal"; }
 	let keyCode = event.data[1];
 	let velocity = event.data[2];
 
-	onMidiKeyPress(downOrUp, keyCode, velocity);
+	onMidiKeyPress(action, keyCode, velocity);
 }
 
 const keyColorBlack = window.getComputedStyle(document.getElementsByClassName("key-top")[0]).getPropertyValue("background-color");
@@ -77,11 +78,12 @@ const keydownArray = [];
 for (let i = 0; i <= 127; i++) {
 	keydownArray[i] = false;
 }
+let isSustainPedalDown = false;
 
 let currentChordNotes = [];
 
-function onMidiKeyPress(downOrUp, keyCode, velocity) {
-	if (downOrUp === "down") {
+function onMidiKeyPress(action, keyCode, velocity) {
+	if (action === "down") {
 		keydownArray[keyCode] = true;
 
 		let keyElem = codeToKeyElem(keyCode);
@@ -91,7 +93,7 @@ function onMidiKeyPress(downOrUp, keyCode, velocity) {
 			const isCorrect = currentChordNotes.includes((keyCode - startingC) % 12);
 			keyElem.style.backgroundColor = isCorrect ? keyColorCorrect : keyColorIncorrect;
 		}
-	} else if (downOrUp === "up") {
+	} else if (action === "up") {
 		keydownArray[keyCode] = false;
 
 		let keyElem = codeToKeyElem(keyCode);
@@ -99,6 +101,14 @@ function onMidiKeyPress(downOrUp, keyCode, velocity) {
 			console.warn(`The key code ${keyCode} does not correspond to an existing html element.`);
 		} else {
 			keyElem.style.backgroundColor = isBlackNote(keyCodeToNote(keyCode)) ? keyColorBlack : keyColorWhite;
+		}
+	} else if (action === "pedal") {
+		if (keyCode === 64) {
+			isSustainPedalDown = velocity !== 0;
+
+			if (isSustainPedalDown) {
+				generateRandomChord();
+			}
 		}
 	}
 }
