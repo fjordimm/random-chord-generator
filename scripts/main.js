@@ -36,7 +36,7 @@ function onMidiMsg(event) {
 	for (const character of event.data) {
 		message += `${character.toString()} `;
 	}
-	console.log(message);
+	// console.log(message);
 
 	let action = null;
 	if (event.data[0] == 144) { action = "down"; }
@@ -56,6 +56,8 @@ const keyColorIncorrect = window.getComputedStyle(document.getElementsByClassNam
 
 const pianoTopElem = document.getElementById("piano-top-elem");
 const pianoBottomElem = document.getElementById("piano-bottom-elem");
+
+const pedalCheckbox = document.querySelector("#pedal-checkbox");
 
 const numOctaves = 5;
 const keyElemArray = [];
@@ -105,9 +107,11 @@ function onMidiKeyPress(action, keyCode, velocity) {
 	} else if (action === "pedal") {
 		if (keyCode === 64) {
 			isSustainPedalDown = velocity !== 0;
-
+			
 			if (isSustainPedalDown) {
-				generateRandomChord();
+				if (pedalCheckbox.checked) {
+					generateRandomChord();
+				}
 			}
 		}
 	}
