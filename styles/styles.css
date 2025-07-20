@@ -1,53 +1,38 @@
 
 :root
 {
-	--key-height-top: 80px;
-	--key-height-bottom: 140px;
-	--key-width-top-small: 20px;
-	--key-width-top-large: 30px;
-	--key-width-bottom: 40px;
+    --background-gray: #C0C0C0;
+
+    --white-key-width: ((100vh - 293.2px) / 5);
 }
 
-html, body
+html
 {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+    max-height: 100%;
 }
 
-.key-top-space-large, .key-top-space-small
+body
 {
-	background-color: transparent;
-}
+    height: 100%;
+    max-height: 100%;
 
-.key-top
-{
-	background-color: #303030;
-	box-shadow: inset 0 0 5px 0px #00000060;
-}
+    margin: 0;
+    padding: 0;
 
-.key-bottom
-{
-	background-color: #E5E5E5;
-	box-shadow: inset 0 0 5px 0px #00000060;
-}
+    background-color: var(--background-gray);
 
-.key-highlight-color
-{
-	background-color: mediumslateblue;
-}
-
-.key-correct-color
-{
-	background-color: green;
-}
-
-.key-incorrect-color
-{
-	background-color: red;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-div
 {
+    flex-grow: 1;
+
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -68,47 +53,36 @@ html, body
 
 .piano
 {
-	display: flex;
-	flex-direction: column;
+    align-self: stretch;
+    flex-grow: 1;
+
+    position: relative;
+
+    background-color: green;
 }
 
-.piano-top
+.white-key
 {
-	display: flex;
-	flex-direction: row;
+    position: absolute;
+
+    height: 100%;
+    aspect-ratio: 1 / 5;
+
+    border: none;
+    background-color: #E5E5E5;
+	box-shadow: inset 6px -6px 6px -6px #00000066,
+                inset -6px 6px 6px -6px #FFFFFFD0;
 }
 
-.piano-top > *
+.black-key
 {
-	z-index: 1;
-}
+    position: absolute;
 
-.piano-bottom
-{
-	display: flex;
-	flex-direction: row;
-}
+    height: 60%;
+    aspect-ratio: 1 / 6;
 
-.piano-bottom > *
-{
-	margin-top: calc(0px - var(--key-height-top));
-	z-index: 0;
-}
-
-.key-top-space-large
-{
-	width: var(--key-width-top-large);
-	height: var(--key-height-top);
-}
-
-.key-top-space-small, .key-top
-{
-	width: var(--key-width-top-small);
-	height: var(--key-height-top);
-}
-
-.key-bottom
-{
-	width: var(--key-width-bottom);
-	height: var(--key-height-bottom);
+    border: none;
+    background-color: #303030;
+	box-shadow: inset 6px -6px 6px -6px #00000066,
+                inset -6px 6px 6px -6px #FFFFFFD0;
 }

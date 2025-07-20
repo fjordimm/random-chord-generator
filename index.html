@@ -12,7 +12,6 @@
 	<body>
 		<div class="main-div">
 			<div class="generate-button-and-settings">
-
 				<button onclick="generateRandomChord()">Generate New</button>
 
 				<label>
@@ -63,114 +62,21 @@
 
 			<textarea readonly style="resize: none" id="chord-textarea">---</textarea>
 
-			<div class="piano">
+            <div class="piano">
+                <button class="white-key" style="left: calc(0 * var(--white-key-width));"></button>
+                <button class="white-key" style="left: calc(1 * var(--white-key-width));"></button>
+                <button class="white-key" style="left: calc(2 * var(--white-key-width));"></button>
+                <button class="white-key" style="left: calc(3 * var(--white-key-width));"></button>
+                <button class="white-key" style="left: calc(4 * var(--white-key-width));"></button>
+                <button class="white-key" style="left: calc(5 * var(--white-key-width));"></button>
+                <button class="white-key" style="left: calc(6 * var(--white-key-width));"></button>
 
-				<div class="piano-top" id="piano-top-elem">
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top-space-large"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-small"></div>
-					<div class="key-top"></div>
-					<div class="key-top-space-large"></div>
-				</div>
-				
-				<div class="piano-bottom" id="piano-bottom-elem">
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-					<div class="key-bottom"></div>
-				</div>
-
-				<div class="key-highlight-color"></div>
-				<div class="key-correct-color"></div>
-				<div class="key-incorrect-color"></div>
-
-			</div>
+                <button class="black-key" style="left: calc(0.75 * var(--white-key-width));"></button>
+                <button class="black-key" style="left: calc(1.75 * var(--white-key-width));"></button>
+                <button class="black-key" style="left: calc(3.75 * var(--white-key-width));"></button>
+                <button class="black-key" style="left: calc(4.75 * var(--white-key-width));"></button>
+                <button class="black-key" style="left: calc(5.75 * var(--white-key-width));"></button>
+            </div>
 		</div>
 	</body>
 
