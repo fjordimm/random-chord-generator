@@ -1,8 +1,6 @@
 
 :root
 {
-    --background-gray: #C0C0C0;
-
     --white-key-width: ((100vh - 293.2px) / 5);
 }
 
@@ -23,10 +21,10 @@ body
     margin: 0;
     padding: 0;
 
-    background-color: var(--background-gray);
-
     display: flex;
     flex-direction: column;
+
+    background-color: white;
 }
 
 .main-div
@@ -68,8 +66,8 @@ body
 
     border: none;
     background-color: #E5E5E5;
-	box-shadow: inset 6px -6px 6px -6px #00000066,
-                inset -6px 6px 6px -6px #FFFFFFD0;
+	box-shadow: inset 1vw -1vw 1vw -1vw #00000066,
+                inset -1vw 1vw 1vw -1vw #FFFFFFFF;
 }
 
 .black-key
@@ -81,6 +79,6 @@ body
 
     border: none;
     background-color: #303030;
-	box-shadow: inset 6px -6px 6px -6px #00000066,
-                inset -6px 6px 6px -6px #FFFFFFD0;
+	box-shadow: inset 1vw -1vw 1vw -1vw #000000D0,
+                inset -1vw 1vw 1vw -1vw #FFFFFF60;
 }
