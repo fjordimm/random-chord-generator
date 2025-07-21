@@ -3,7 +3,8 @@
 
 :root
 {
-    --white-key-width: ((100vh - 293.2px) / 5);
+    /* WARNING: 323.6px is a magic number coming from the full view height minus the height of the #piano element. */
+    --white-key-width: ((100vh - 323.6px) / 5);
 }
 
 html
@@ -49,7 +50,7 @@ body
 	flex-direction: column;
 }
 
-button
+.generate-button
 {
     font-family: "Noto Sans", sans-serif;
     font-size: 16px;
