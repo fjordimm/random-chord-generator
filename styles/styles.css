@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root
 {
     --white-key-width: ((100vh - 293.2px) / 5);
@@ -11,6 +13,9 @@ html
 
     height: 100%;
     max-height: 100%;
+
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
 }
 
 body
@@ -44,9 +49,40 @@ body
 	flex-direction: column;
 }
 
+button
+{
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+}
+
 .slider-input
 {
 	width: 120px;
+}
+
+.number-input
+{
+    width: 2em;
+
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+}
+
+/* Hide arrows for number input */
+.number-input::-webkit-outer-spin-button, .number-input::-webkit-inner-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+.number-input
+{
+    -moz-appearance: textfield;
+}
+
+textarea
+{
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
 }
 
 #piano

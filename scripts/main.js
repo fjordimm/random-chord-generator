@@ -22,15 +22,6 @@ function onPianoKeyClicked(keyNum) {
     alert("hi");
 }
 
-function onMIDISuccess(midiAccess) {
-	whenMidiAvailable(midiAccess);
-}
-
-function onMIDIFailure(msg) {
-	alert("Midi access was denied (see console for more details).");
-	console.error(`Failed to get MIDI access - ${msg}`);
-}
-
 function main() {
 	if (!window.isSecureContext)
 	{
@@ -42,6 +33,15 @@ function main() {
 
 		generateRandomChord();
 	}
+}
+
+function onMIDISuccess(midiAccess) {
+	whenMidiAvailable(midiAccess);
+}
+
+function onMIDIFailure(msg) {
+	alert("Midi access was denied (see console for more details).");
+	console.error(`Failed to get MIDI access - ${msg}`);
 }
 
 function whenMidiAvailable(midiAccess) {
