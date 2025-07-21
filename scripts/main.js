@@ -1,4 +1,27 @@
 
+const keydownArray = [];
+for (let i = 0; i <= 127; i++) { keydownArray[i] = false; }
+let isSustainPedalDown = false;
+
+let currentChordNotes = [];
+
+const pianoElem = document.getElementById("piano");
+const pedalCheckbox = document.getElementById("pedal-checkbox");
+
+const sliderMajor = document.querySelector("#slider-major");
+const sliderMinor = document.querySelector("#slider-minor");
+const sliderDiminished = document.querySelector("#slider-diminished");
+const sliderMajor7 = document.querySelector("#slider-major7");
+const sliderDominant7 = document.querySelector("#slider-dominant7");
+const sliderMinor7 = document.querySelector("#slider-minor7");
+const sliderHalfDiminished7 = document.querySelector("#slider-half-diminished7");
+const sliderDiminished7 = document.querySelector("#slider-diminished7");
+const chordTextarea = document.getElementById("chord-textarea");
+
+function onPianoKeyClicked(keyNum) {
+    alert("hi");
+}
+
 function onMIDISuccess(midiAccess) {
 	whenMidiAvailable(midiAccess);
 }
@@ -15,7 +38,7 @@ function main() {
 	}
 	else
 	{
-		navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+		// navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
 		generateRandomChord();
 	}
@@ -48,42 +71,6 @@ function onMidiMsg(event) {
 	onMidiKeyPress(action, keyCode, velocity);
 }
 
-const keyColorBlack = window.getComputedStyle(document.getElementsByClassName("key-top")[0]).getPropertyValue("background-color");
-const keyColorWhite = window.getComputedStyle(document.getElementsByClassName("key-bottom")[0]).getPropertyValue("background-color");
-const keyColorHighlight = window.getComputedStyle(document.getElementsByClassName("key-highlight-color")[0]).getPropertyValue("background-color");
-const keyColorCorrect = window.getComputedStyle(document.getElementsByClassName("key-correct-color")[0]).getPropertyValue("background-color");
-const keyColorIncorrect = window.getComputedStyle(document.getElementsByClassName("key-incorrect-color")[0]).getPropertyValue("background-color");
-
-const pianoTopElem = document.getElementById("piano-top-elem");
-const pianoBottomElem = document.getElementById("piano-bottom-elem");
-
-const pedalCheckbox = document.querySelector("#pedal-checkbox");
-
-const numOctaves = 5;
-const keyElemArray = [];
-for (let octave = 0; octave < numOctaves; octave++) {
-	keyElemArray[12 * octave +  0] = pianoBottomElem.children[7 * octave + 0];
-	keyElemArray[12 * octave +  1] = pianoTopElem.children[12 * octave + 1];
-	keyElemArray[12 * octave +  2] = pianoBottomElem.children[7 * octave + 1];
-	keyElemArray[12 * octave +  3] = pianoTopElem.children[12 * octave + 3];
-	keyElemArray[12 * octave +  4] = pianoBottomElem.children[7 * octave + 2];
-	keyElemArray[12 * octave +  5] = pianoBottomElem.children[7 * octave + 3];
-	keyElemArray[12 * octave +  6] = pianoTopElem.children[12 * octave + 6];
-	keyElemArray[12 * octave +  7] = pianoBottomElem.children[7 * octave + 4];
-	keyElemArray[12 * octave +  8] = pianoTopElem.children[12 * octave + 8];
-	keyElemArray[12 * octave +  9] = pianoBottomElem.children[7 * octave + 5];
-	keyElemArray[12 * octave + 10] = pianoTopElem.children[12 * octave + 10];
-	keyElemArray[12 * octave + 11] = pianoBottomElem.children[7 * octave + 6];
-}
-
-const keydownArray = [];
-for (let i = 0; i <= 127; i++) {
-	keydownArray[i] = false;
-}
-let isSustainPedalDown = false;
-
-let currentChordNotes = [];
-
 function onMidiKeyPress(action, keyCode, velocity) {
 	if (action === "down") {
 		keydownArray[keyCode] = true;
@@ -115,35 +102,6 @@ function onMidiKeyPress(action, keyCode, velocity) {
 			}
 		}
 	}
-}
-
-const startingC = 24;
-
-function codeToKeyElem(keyCode) {
-	const index = keyCode - startingC;
-	if (index < 0 || index >= keyElemArray.length) {
-		return null;
-	} else {
-		return keyElemArray[keyCode - startingC];
-	}
-}
-
-function keyCodeToNote(keyCode) {
-	return modNote(keyCode - startingC);
-}
-
-function modNote(note) {
-	return note % 12;
-}
-
-function isBlackNote(note) {
-	const realNote = modNote(note);
-
-	return realNote === 1
-	    || realNote === 3
-	    || realNote === 6
-	    || realNote === 8
-	    || realNote === 10;
 }
 
 function generateRandomChord() {
@@ -192,16 +150,6 @@ function noteValToName(val, sharpInsteadOfFlat = false) {
 			return "(ErrorNote)";
 	}
 }
-
-const chordTextarea = document.getElementById("chord-textarea");
-const sliderMajor = document.querySelector("#slider-major");
-const sliderMinor = document.querySelector("#slider-minor");
-const sliderDiminished = document.querySelector("#slider-diminished");
-const sliderMajor7 = document.querySelector("#slider-major7");
-const sliderDominant7 = document.querySelector("#slider-dominant7");
-const sliderMinor7 = document.querySelector("#slider-minor7");
-const sliderHalfDiminished7 = document.querySelector("#slider-half-diminished7");
-const sliderDiminished7 = document.querySelector("#slider-diminished7");
 
 function getSuffixAndIntervals() {
 	const weightMajor = parseInt(sliderMajor.value);

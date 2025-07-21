@@ -49,7 +49,7 @@ body
 	width: 120px;
 }
 
-.piano
+#piano
 {
     align-self: stretch;
     flex-grow: 1;
@@ -68,6 +68,11 @@ body
     background-color: #E5E5E5;
 	box-shadow: inset 1vw -1vw 1vw -1vw #00000066,
                 inset -1vw 1vw 1vw -1vw #FFFFFFFF;
+}
+
+.white-key.pressed, .black-key.pressed
+{
+    background-color: blue;
 }
 
 .black-key
