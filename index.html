@@ -21,7 +21,6 @@
 
 				<label>
 					<input type="range" class="slider-input" min="0" max="100" value="100" id="slider-major" name="slider-major">
-                    <input type="number" class="number-input">
 					Major
 				</label>
 
@@ -64,19 +63,19 @@
 			<textarea readonly style="resize: none" id="chord-textarea">---</textarea>
 
             <div id="piano">
-                <button id="key_0"  onclick="onPianoKeyClicked(0);"  class="white-key" style="left: calc(0 * var(--white-key-width));"></button>
-                <button id="key_2"  onclick="onPianoKeyClicked(2);"  class="white-key" style="left: calc(1 * var(--white-key-width));"></button>
-                <button id="key_4"  onclick="onPianoKeyClicked(4);"  class="white-key" style="left: calc(2 * var(--white-key-width));"></button>
-                <button id="key_5"  onclick="onPianoKeyClicked(5);"  class="white-key" style="left: calc(3 * var(--white-key-width));"></button>
-                <button id="key_7"  onclick="onPianoKeyClicked(7);"  class="white-key" style="left: calc(4 * var(--white-key-width));"></button>
-                <button id="key_9"  onclick="onPianoKeyClicked(9);"  class="white-key" style="left: calc(5 * var(--white-key-width));"></button>
-                <button id="key_11" onclick="onPianoKeyClicked(11);" class="white-key" style="left: calc(6 * var(--white-key-width));"></button>
+                <button id="key_0"  class="white-key" style="left: calc(0 * var(--white-key-width));"></button>
+                <button id="key_2"  class="white-key" style="left: calc(1 * var(--white-key-width));"></button>
+                <button id="key_4"  class="white-key" style="left: calc(2 * var(--white-key-width));"></button>
+                <button id="key_5"  class="white-key" style="left: calc(3 * var(--white-key-width));"></button>
+                <button id="key_7"  class="white-key" style="left: calc(4 * var(--white-key-width));"></button>
+                <button id="key_9"  class="white-key" style="left: calc(5 * var(--white-key-width));"></button>
+                <button id="key_11" class="white-key" style="left: calc(6 * var(--white-key-width));"></button>
 
-                <button id="key_1"  onclick="onPianoKeyClicked(1);"  class="black-key" style="left: calc((1 - 7/16) * var(--white-key-width));"></button>
-                <button id="key_3"  onclick="onPianoKeyClicked(3);"  class="black-key" style="left: calc((2 - 5/16) * var(--white-key-width));"></button>
-                <button id="key_6"  onclick="onPianoKeyClicked(6);"  class="black-key" style="left: calc((4 - 4/8) * var(--white-key-width));"></button>
-                <button id="key_8"  onclick="onPianoKeyClicked(8);"  class="black-key" style="left: calc((5 - 3/8) * var(--white-key-width));"></button>
-                <button id="key_10" onclick="onPianoKeyClicked(10);" class="black-key" style="left: calc((6 - 2/8) * var(--white-key-width));"></button>
+                <button id="key_1"  class="black-key" style="left: calc((1 - 7/16) * var(--white-key-width));"></button>
+                <button id="key_3"  class="black-key" style="left: calc((2 - 5/16) * var(--white-key-width));"></button>
+                <button id="key_6"  class="black-key" style="left: calc((4 - 4/8) * var(--white-key-width));"></button>
+                <button id="key_8"  class="black-key" style="left: calc((5 - 3/8) * var(--white-key-width));"></button>
+                <button id="key_10" class="black-key" style="left: calc((6 - 2/8) * var(--white-key-width));"></button>
             </div>
 		</div>
 	</body>

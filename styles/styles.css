@@ -107,11 +107,6 @@ textarea
                 inset -1vw 1vw 1vw -1vw #FFFFFFFF;
 }
 
-.white-key.pressed, .black-key.pressed
-{
-    background-color: blue;
-}
-
 .black-key
 {
     position: absolute;
@@ -123,4 +118,9 @@ textarea
     background-color: #303030;
 	box-shadow: inset 1vw -1vw 1vw -1vw #000000D0,
                 inset -1vw 1vw 1vw -1vw #FFFFFF60;
+}
+
+.white-key.pressed, .black-key.pressed
+{
+    background-color: blue;
 }
