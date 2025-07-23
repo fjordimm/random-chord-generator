@@ -31,12 +31,12 @@ function main()
         for (let i = 0; i < 12; i++)
         {
             keyElem = document.getElementById(`key_${i}`);
-            
+
             keyElem.addEventListener("mousedown", () =>
-            { whenKeyDown(i); });
+            { whenNoteDown(i); });
 
             document.addEventListener("mouseup", () =>
-            { whenKeyUp(i); });
+            { whenNoteUp(i); });
         }
 
         generateRandomChord();
@@ -131,14 +131,21 @@ function onMidiKeyPress(action, keyCode, velocity)
     }
 }
 
-function whenKeyDown(key)
+function whenNoteDown(note)
 {
-    document.getElementById(`key_${key}`).classList.add("pressed");
+    if (currentChordNotes.includes(note))
+    {
+        document.getElementById(`key_${note}`).classList.add("correct");
+    } else
+    {
+        document.getElementById(`key_${note}`).classList.add("incorrect");
+    }
 }
 
-function whenKeyUp(key)
+function whenNoteUp(note)
 {
-    document.getElementById(`key_${key}`).classList.remove("pressed");
+    document.getElementById(`key_${note}`).classList.remove("correct");
+    document.getElementById(`key_${note}`).classList.remove("incorrect");
 }
 
 function generateRandomChord()

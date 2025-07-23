@@ -120,7 +120,12 @@ textarea
                 inset -1vw 1vw 1vw -1vw #FFFFFF60;
 }
 
-.white-key.pressed, .black-key.pressed
+.white-key.correct, .black-key.correct
 {
-    background-color: blue;
+    background-color: #00A70B;
+}
+
+.white-key.incorrect, .black-key.incorrect
+{
+    background-color: #c00b0bff;
 }
