@@ -26,7 +26,7 @@ function main()
     }
     else
     {
-        // navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+        navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
         for (let i = 0; i < 12; i++)
         {
@@ -70,11 +70,11 @@ function whenMidiAvailable(midiAccess)
 
 function onMidiMsg(event)
 {
-    let message = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `;
-    for (const character of event.data)
-    {
-        message += `${character.toString()} `;
-    }
+    // let message = `MIDI message received at timestamp ${event.timeStamp}[${event.data.length} bytes]: `;
+    // for (const character of event.data)
+    // {
+    //     message += `${character.toString()} `;
+    // }
     // console.log(message);
 
     let action = null;
@@ -92,29 +92,14 @@ function onMidiKeyPress(action, keyCode, velocity)
     if (action === "down")
     {
         midiKeydownArray[keyCode] = true;
-
-        let keyElem = codeToKeyElem(keyCode);
-        if (!keyElem)
-        {
-            console.warn(`The key code ${keyCode} does not correspond to an existing html element.`);
-        } else
-        {
-            const isCorrect = currentChordNotes.includes((keyCode - startingC) % 12);
-            keyElem.style.backgroundColor = isCorrect ? keyColorCorrect : keyColorIncorrect;
-        }
-    } else if (action === "up")
+        checkAndUpdateNote(keyCode);
+    }
+    else if (action === "up")
     {
         midiKeydownArray[keyCode] = false;
-
-        let keyElem = codeToKeyElem(keyCode);
-        if (!keyElem)
-        {
-            console.warn(`The key code ${keyCode} does not correspond to an existing html element.`);
-        } else
-        {
-            keyElem.style.backgroundColor = isBlackNote(keyCodeToNote(keyCode)) ? keyColorBlack : keyColorWhite;
-        }
-    } else if (action === "pedal")
+        checkAndUpdateNote(keyCode);
+    }
+    else if (action === "pedal")
     {
         if (keyCode === 64)
         {
@@ -129,6 +114,25 @@ function onMidiKeyPress(action, keyCode, velocity)
             }
         }
     }
+}
+
+function checkAndUpdateNote(keyCode)
+{
+    /* Note: C-1 is midi note 0. */
+
+    const note = keyCode % 12;
+
+    let anyOfTheNoteDown = false;
+    for (let i = note; i <= 127; i += 12)
+    {
+        if (midiKeydownArray[i] === true)
+        { anyOfTheNoteDown = true; }
+    }
+
+    if (anyOfTheNoteDown)
+    { whenNoteDown(note); }
+    else
+    { whenNoteUp(note); }
 }
 
 function whenNoteDown(note)
